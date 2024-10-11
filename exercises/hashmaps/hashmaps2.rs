@@ -14,8 +14,6 @@
 // Execute `rustlings hint hashmaps2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Hash, PartialEq, Eq)]
@@ -40,6 +38,11 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // TODO: Insert new fruits if they are not already present in the
         // basket. Note that you are not allowed to put any type of fruit that's
         // already present!
+        match basket.get_mut(&fruit) {
+            Some(count) if *count == 0 => *count = 1, // 如果已有此水果但数量为0，则设置为1
+            None => { basket.insert(fruit, 1); },      // 如果没有此水果，则插入数量为1
+            _ => (),                                   // 其他情况不做处理
+        }
     }
 }
 
