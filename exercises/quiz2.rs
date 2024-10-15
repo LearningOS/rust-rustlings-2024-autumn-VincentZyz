@@ -20,7 +20,6 @@
 //
 // No hints this time!
 
-// I AM NOT DONE
 
 pub enum Command {
     Uppercase,
@@ -31,18 +30,18 @@ pub enum Command {
 mod my_module {
     use super::Command;
 
-    // TODO: Complete the function signature!
-    pub fn transformer(input: Vec<String, Command>) -> Vec<String> {
-        // TODO: Complete the output declaration!
+    // 完成函数签名
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {  // 修改为元组向量
+        // 完成输出声明
         let mut output: Vec<String> = Vec::new();
 
         for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
+            // 完成函数体
             let transformed_string = match command {
                 Command::Uppercase => string.to_uppercase(),
                 Command::Trim => string.trim().to_string(),
                 Command::Append(n) => {
-                    format!("{}{}", string, string.repeat(*n))
+                    format!("{}{}", string, "bar".repeat(*n))  // 修改字符串拼接部分
                 },
             };
             output.push(transformed_string);
