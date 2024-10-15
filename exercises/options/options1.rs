@@ -3,18 +3,24 @@
 // Execute `rustlings hint options1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 // This function returns how much icecream there is left in the fridge.
 // If it's before 10PM, there's 5 pieces left. At 10PM, someone eats them
 // all, so there'll be no more left :(
-fn maybe_icecream(time_of_day: u16) -> Option<u16> {
-    // We use the 24-hour system here, so 10PM is a value of 22 and 12AM is a
-    // value of 0 The Option output should gracefully handle cases where
-    // time_of_day > 23.
-    // TODO: Complete the function body - remember to return an Option!
-    ???
-}
+    fn maybe_icecream(time_of_day: u16) -> Option<u16> {
+        // We use the 24-hour system here, so 10PM is a value of 22 and 12AM is a
+        // value of 0 The Option output should gracefully handle cases where
+        // time_of_day > 23.
+        // TODO: Complete the function body - remember to return an Option!
+    
+        if time_of_day <= 21 {
+            Some(5)  // 如果时间在 0 到 21 之间，返回 Some(5)
+        } else if time_of_day >= 22 && time_of_day <= 23 {
+            Some(0)  // 如果时间在 22 到 23 之间，返回 Some(0)
+        } else {
+            None     // 如果时间大于 23，返回 None
+        }
+    }
 
 #[cfg(test)]
 mod tests {
@@ -34,6 +40,16 @@ mod tests {
         // TODO: Fix this test. How do you get at the value contained in the
         // Option?
         let icecreams = maybe_icecream(12);
-        assert_eq!(icecreams, 5);
+        assert_eq!(icecreams, Some(5));
     }
+}
+
+// 主函数
+fn main() {
+    println!("Ice cream at 21: {:?}", maybe_icecream(21)); // Should print Some(5)
+    println!("Ice cream at 22: {:?}", maybe_icecream(22)); // Should print None
+    println!("Ice cream at 23: {:?}", maybe_icecream(23)); // Should print None
+    println!("Ice cream at 0: {:?}", maybe_icecream(0)); // Should print Some(5)
+    println!("Ice cream at 24: {:?}", maybe_icecream(24)); // Should print None
+    println!("Ice cream at 25: {:?}", maybe_icecream(25)); // Should print None
 }
