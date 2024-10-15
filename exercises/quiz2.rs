@@ -20,7 +20,6 @@
 //
 // No hints this time!
 
-// I AM NOT DONE
 
 pub enum Command {
     Uppercase,
@@ -31,18 +30,22 @@ pub enum Command {
 mod my_module {
     use super::Command;
 
-    // TODO: Complete the function signature!
-    pub fn transformer(input: Vec<String, Command>) -> Vec<String> {
-        // TODO: Complete the output declaration!
+    // 完成函数签名
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
+        // 完成输出声明
         let mut output: Vec<String> = Vec::new();
 
         for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
+            // 完成函数体
             let transformed_string = match command {
                 Command::Uppercase => string.to_uppercase(),
                 Command::Trim => string.trim().to_string(),
                 Command::Append(n) => {
-                    format!("{}{}", string, string.repeat(*n))
+                    let mut result = string.clone();
+                    for _ in 0..*n {
+                        result.push_str("bar");
+                    }
+                    result
                 },
             };
             output.push(transformed_string);
@@ -70,4 +73,18 @@ mod tests {
         assert_eq!(output[2], "foobar");
         assert_eq!(output[3], "barbarbarbarbarbar");
     }
+}
+
+// 主函数
+fn main() {
+    let input = vec![
+        (String::from("hello"), Command::Uppercase),
+        (String::from("  rust  "), Command::Trim),
+        (String::from("foo"), Command::Append(3)),
+    ];
+
+    let output = my_module::transformer(input);
+
+    assert_eq!(output, vec!["HELLO", "rust", "foobarbarbar"]);
+    println!("All tests passed!");
 }
